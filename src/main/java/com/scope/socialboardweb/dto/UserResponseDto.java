@@ -6,5 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class UserResponseDto {
+    String accessToken;
+    String userId;
+    String nickname;
+    String phoneNumber;
 
 }

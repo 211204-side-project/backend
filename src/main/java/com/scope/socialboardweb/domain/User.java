@@ -1,8 +1,10 @@
 package com.scope.socialboardweb.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,5 +25,9 @@ public class User {
     private String phoneNumber;
 
     private Boolean isVerifiedEmail;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> postList = new ArrayList<>();
 
 }
