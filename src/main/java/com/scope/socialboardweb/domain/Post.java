@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Post {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "post_id", nullable = false)
     private Long id;
 
     private String title;
