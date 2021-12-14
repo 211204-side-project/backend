@@ -28,7 +28,7 @@ public class JwtTokenProvider {
     /**
      * JWT 토큰 생성 메서드
      */
-    public String createJwtToken(String userId) {
+    public String createJwtToken(Long userPk) {
         Date now = new Date();
 
         return Jwts.builder()
@@ -36,7 +36,7 @@ public class JwtTokenProvider {
             .setIssuer("scope") //토큰 발급자(iss) 설정
             .setIssuedAt(now) //토큰 발급 시간(iat) 설정
             .setExpiration(new Date(now.getTime() + tokenValidityInMilliseconds)) // 만료시간 설정
-            .claim("userId", userId) //토큰을 받을 사용자의 아이디를 비공개 클레임으로 설정
+            .claim("userPk", userPk) //토큰을 받을 사용자의 아이디를 비공개 클레임으로 설정
             .signWith(SignatureAlgorithm.HS512, secretKey) //해싱 알고리즘으로 HS512를 사용하기 때문에, secretKey가 512비트 이상이어야 함
             .compact();
     }
