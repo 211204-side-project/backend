@@ -1,12 +1,14 @@
 package com.scope.socialboardweb.domain;
 
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Getter
 @Entity
 @Data
 public class User {
@@ -29,5 +31,9 @@ public class User {
     private String userImgUrl;
     @Column
     private Boolean isVerifiedEmail;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> postList = new ArrayList<>();
 
 }
