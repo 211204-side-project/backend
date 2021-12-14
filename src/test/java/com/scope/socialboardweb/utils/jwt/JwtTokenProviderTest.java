@@ -20,7 +20,7 @@ class JwtTokenProviderTest {
 
         //when
         JwtTokenProvider tokenProvider = new JwtTokenProvider(secretKey, tokenValidityInMilliseconds);
-        token = tokenProvider.createJwtToken("testUser");
+        token = tokenProvider.createJwtToken(1L);
 
         //then
         assertNotNull(token);
@@ -31,7 +31,7 @@ class JwtTokenProviderTest {
     void validateTokenSuccessCase() {
         //given
         JwtTokenProvider tokenProvider = new JwtTokenProvider(secretKey, tokenValidityInMilliseconds);
-        String token = "Bearer " + tokenProvider.createJwtToken("testUser");
+        String token = "Bearer " + tokenProvider.createJwtToken(1L);
         Claims claims;
 
         //when
@@ -39,7 +39,7 @@ class JwtTokenProviderTest {
 
         //then
         assertAll(
-            () -> {assertEquals("testUser", claims.get("userId"));},
+            () -> {assertEquals(1, claims.get("userPk"));},
             () -> {assertEquals("scope", claims.get("iss"));}
         );
     }
@@ -49,7 +49,7 @@ class JwtTokenProviderTest {
     void validateTokenFormatFail() {
         //given
         JwtTokenProvider tokenProvider = new JwtTokenProvider(secretKey, tokenValidityInMilliseconds);
-        String token = tokenProvider.createJwtToken("testUser");
+        String token = tokenProvider.createJwtToken(1L);
         Claims claims;
 
         //then
@@ -64,7 +64,7 @@ class JwtTokenProviderTest {
         //given
         long tokenValidityInMilliseconds = 0;
         JwtTokenProvider tokenProvider = new JwtTokenProvider(secretKey, tokenValidityInMilliseconds);
-        String token = "Bearer " + tokenProvider.createJwtToken("testUser");
+        String token = "Bearer " + tokenProvider.createJwtToken(1L);
         Claims claims;
 
         //then
