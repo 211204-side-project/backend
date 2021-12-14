@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 public class PostRequestDto {
     String title;
     String content;

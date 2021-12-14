@@ -1,8 +1,10 @@
 package com.scope.socialboardweb.dto;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Getter
 public class ResponseDto {
     Object object;
     String msg;

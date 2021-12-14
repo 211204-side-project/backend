@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 public class CommentRequestDto {
     String comment;
 }
