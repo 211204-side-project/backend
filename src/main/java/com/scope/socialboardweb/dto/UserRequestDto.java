@@ -16,5 +16,5 @@ public class UserRequestDto {
     @NotNull
     private String nickname;
 
-    private String avatarUrl;
+    private String userImgUrl;
 }

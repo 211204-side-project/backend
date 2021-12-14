@@ -1,10 +1,11 @@
 package com.scope.socialboardweb.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@Getter
-@RequiredArgsConstructor
+@Setter
 public class UserResponseDto {
-
+    private String createAccountMessage;
 }
