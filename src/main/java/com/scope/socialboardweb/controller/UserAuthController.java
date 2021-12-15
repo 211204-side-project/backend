@@ -3,7 +3,7 @@ package com.scope.socialboardweb.controller;
 import com.scope.socialboardweb.dto.AuthNicknameDto;
 import com.scope.socialboardweb.dto.AuthPhoneNumberDto;
 import com.scope.socialboardweb.dto.AuthUserIdDto;
-import com.scope.socialboardweb.repository.UserRepository;
+import com.scope.socialboardweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class UserAuthController {
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @PostMapping("/userId")
-    Boolean checkDuplicateUser(@RequestBody AuthUserIdDto authUserIdDto) {
-        return userRepository.findByUserId(authUserIdDto.getUserId()).isEmpty();
+    Boolean isNotDuplicateUserId(@RequestBody AuthUserIdDto authUserIdDto) {
+        return userService.isNotDuplicateUserId(authUserIdDto.getUserId());
     }
     @PostMapping("/phoneNumber")
-    Boolean checkDuplicatePhone(@RequestBody AuthPhoneNumberDto authPhoneNumberDto) {
-        return userRepository.findByPhoneNumber(authPhoneNumberDto.getPhoneNumber()).isEmpty();
+    Boolean isNotDuplicatePhoneNumber(@RequestBody AuthPhoneNumberDto authPhoneNumberDto) {
+        return userService.isNotDuplicatePhoneNumber(authPhoneNumberDto.getPhoneNumber());
     }
     @PostMapping("/nickname")
-    Boolean checkDuplicateNickname(@RequestBody AuthNicknameDto authNicknameDto) {
-        return userRepository.findByNickname(authNicknameDto.getNickname()).isEmpty();
+    Boolean isNotDuplicateNickname(@RequestBody AuthNicknameDto authNicknameDto) {
+        return userService.isNotDuplicateNickname(authNicknameDto.getNickname());
     }
 }
 
