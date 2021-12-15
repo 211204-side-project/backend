@@ -19,9 +19,9 @@ public class UserRestController {
     private UserService userService;
 
     @PostMapping("/signup")
-    ResponseDto signup(@RequestBody UserRequestDto userRequestDto) {
-        User user = new User(userRequestDto);
-        boolean userJoinSuccess = userService.join(user);
-        return new ResponseDto(new UserResponseDto(user), userJoinSuccess ? "Signup succeeded" : "Signup failed");
+    Boolean signup(@RequestBody UserRequestDto userRequestDto) {
+        User user = userService.join(new User(userRequestDto));
+//        return new ResponseDto(user, "true");
+        return true;
     }
 }

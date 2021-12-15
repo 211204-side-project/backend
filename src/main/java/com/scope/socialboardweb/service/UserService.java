@@ -15,13 +15,11 @@ public class UserService {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
-    public boolean join(User user) {
-        if(duplicateUserExist(user)) return false;
-        userRepository.save(user);
-        return true;
+    public User join(User user) {
+        return userRepository.save(user);
     }
 
-    private boolean duplicateUserExist(User user) {
-        return userRepository.findByUserId(user.getUserId()).isPresent();
-    }
+//    private boolean duplicateUserExist(User user) {
+//        return userRepository.findByUserId(user.getUserId()).isPresent();
+//    }
 }
