@@ -34,6 +34,11 @@ public class UserService {
         return userRepository.findByNickname(nickname).isEmpty();
     }
 
+    public User findUserById(Long id) {
+
+        return userRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("해당 유저를 찾을 수 없습니다."));
+    }
+
 //    private boolean duplicateUserExist(User user) {
 //        return userRepository.findByUserId(user.getUserId()).isPresent();
 //    }
