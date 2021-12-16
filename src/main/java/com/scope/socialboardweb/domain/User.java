@@ -9,13 +9,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -25,11 +26,9 @@ public class User {
     @Column(nullable = false)
     @JsonIgnore
     private String password;
-
-    // int? string?
     @Column(nullable = false)
     private String phoneNumber;
-    @Column
+    @Column(name = "profileImg")
     private String userImgUrl;
     @Column
     private Boolean isVerifiedEmail;
@@ -43,10 +42,19 @@ public class User {
         this.isVerifiedEmail = false;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Post> postList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Comment> commentList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Alert> alertList = new ArrayList<>();
 
+    /*
+    Follow와 ChatRoom에 대해, 양방향 관계로 할건지 의논 필요
+     */
 }
