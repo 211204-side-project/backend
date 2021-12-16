@@ -7,10 +7,9 @@ import com.scope.socialboardweb.dto.ResponseDto;
 import com.scope.socialboardweb.service.CommentService;
 import com.scope.socialboardweb.service.PostService;
 import com.scope.socialboardweb.service.UserService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class CommentController {
 
 
 
-    @GetMapping("/api/comment")
+    @PostMapping("/api/comment")
     public ResponseDto saveComment(@RequestBody CommentRequestDto requestDto ){
 
         User user = userService.findUserById(requestDto.getUserId());
@@ -29,4 +28,12 @@ public class CommentController {
         commentService.saveComment(user,post,requestDto.getComment());
         return new ResponseDto(true,"댓글이 작성되었습니다");
     }
+
+    @DeleteMapping("/api/comment")
+    public ResponseDto deleteComment(@RequestParam Long commentId){
+        commentService.deleteComment(commentId);
+        return new ResponseDto(true,"댓글이 삭제되었습니다.");
+    }
+
+    
 }
