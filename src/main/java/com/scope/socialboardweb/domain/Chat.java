@@ -15,6 +15,9 @@ public class Chat {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "text")
+    private String text;
+
     @ManyToOne
     @JoinColumn(name = "chatRoomId")
     private ChatRoom chatRoom;
