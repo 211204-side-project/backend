@@ -34,6 +34,10 @@ public class UserService {
         return userRepository.findByNickname(nickname).isEmpty();
     }
 
+    public User findById(Long id) {
+        return userRepository.findById(id).get();
+    }
+
 //    private boolean duplicateUserExist(User user) {
 //        return userRepository.findByUserId(user.getUserId()).isPresent();
 //    }
