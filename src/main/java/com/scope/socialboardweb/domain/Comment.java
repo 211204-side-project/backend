@@ -26,6 +26,7 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
+
     public Comment(User user, Post post,String comment) {
         this.user = user;
         this.post = post;
