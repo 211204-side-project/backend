@@ -52,5 +52,13 @@ public class PostService {
         } else { return false; }
     }
 
+    public Post findPostByPostId(Long postId){
+        Post post = postRepository.findById(postId).orElseThrow(()->new IllegalArgumentException("해당 포스트를 찾을 수 없습니다."));
+        return post;
+
+    }
+
+
+
 
 }
