@@ -5,7 +5,6 @@ import com.scope.socialboardweb.domain.Post;
 import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.CommentResponseDto;
 import com.scope.socialboardweb.repository.CommentRepository;
-import com.scope.socialboardweb.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,7 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId) {
         Comment comment = commentRepository.findById(commentId).orElseThrow(()->new IllegalAccessError("해당 댓글을 찾을 수 없습니다."));
+        comment.deleteComment();
         commentRepository.delete(comment);
     }
 

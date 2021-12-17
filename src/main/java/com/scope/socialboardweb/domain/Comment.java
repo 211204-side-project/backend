@@ -31,4 +31,10 @@ public class Comment {
         this.post = post;
         this.comment = comment;
     }
+
+    public void deleteComment(){
+        this.post.getCommentList().remove(this);
+        this.user.getCommentList().remove(this);
+    }
+
 }
