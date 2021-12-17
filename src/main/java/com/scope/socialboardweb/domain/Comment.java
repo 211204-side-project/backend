@@ -26,6 +26,17 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
+    public Comment(User user, Post post,String comment) {
+        this.user = user;
+        this.post = post;
+        this.comment = comment;
+    }
+
+    public void deleteComment(){
+        this.post.getCommentList().remove(this);
+        this.user.getCommentList().remove(this);
+    }
+
     //양방향 관계 편의 메서드
     public void setUser(User user) {
         if (this.getUser() != null) {
