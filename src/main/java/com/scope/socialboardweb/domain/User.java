@@ -54,7 +54,9 @@ public class User {
     @JsonIgnore
     private List<Alert> alertList = new ArrayList<>();
 
-    /*
+    /* TODO
     Follow와 ChatRoom에 대해, 양방향 관계로 할건지 의논 필요
      */
+
+
 }

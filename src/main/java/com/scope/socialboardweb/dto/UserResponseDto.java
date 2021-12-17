@@ -17,4 +17,9 @@ public class UserResponseDto {
         this.nickname = user.getNickname();
         this.phoneNumber = user.getPhoneNumber();
     }
+
+    public UserResponseDto(User user, String accessToken) {
+        this(user);
+        this.accessToken = accessToken;
+    }
 }

@@ -1,9 +1,7 @@
 package com.scope.socialboardweb.controller;
 
 import com.scope.socialboardweb.domain.User;
-import com.scope.socialboardweb.dto.ResponseDto;
-import com.scope.socialboardweb.dto.UserRequestDto;
-import com.scope.socialboardweb.dto.UserResponseDto;
+import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +21,11 @@ public class UserRestController {
         User user = userService.join(new User(userRequestDto));
 //        return new ResponseDto(user, "true");
         return true;
+    }
+
+    @PostMapping("/signin")
+    ResponseDto signin(@RequestBody UserLoginDto userLoginDto) {
+        JwtTokenDto tokenDto = userService.login(userLoginDto);
+        return new ResponseDto(tokenDto, "Signin succeeded");
     }
 }
