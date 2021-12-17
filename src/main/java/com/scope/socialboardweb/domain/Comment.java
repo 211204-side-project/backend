@@ -26,7 +26,6 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-
     public Comment(User user, Post post,String comment) {
         this.user = user;
         this.post = post;
@@ -38,4 +37,20 @@ public class Comment {
         this.user.getCommentList().remove(this);
     }
 
+    //양방향 관계 편의 메서드
+    public void setUser(User user) {
+        if (this.getUser() != null) {
+            this.user.getCommentList().remove(this);
+        }
+        user.getCommentList().add(this);
+        this.user = user;
+    }
+
+    public void setPost(Post post) {
+        if (this.getPost() != null) {
+            this.getPost().getCommentList().remove(this);
+        }
+        post.getCommentList().add(this);
+        this.post = post;
+    }
 }

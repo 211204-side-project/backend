@@ -18,4 +18,13 @@ public class Chat {
     @ManyToOne
     @JoinColumn(name = "chatRoomId")
     private ChatRoom chatRoom;
+
+    //양방향 관계 편의 메서드
+    public void setChatRoom(ChatRoom chatRoom) {
+        if (this.getChatRoom() != null) {
+            this.getChatRoom().getChatList().remove(this);
+        }
+        chatRoom.getChatList().add(this);
+        this.chatRoom = chatRoom;
+    }
 }

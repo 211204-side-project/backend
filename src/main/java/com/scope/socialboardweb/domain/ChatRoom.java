@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -22,4 +24,7 @@ public class ChatRoom {
     @ManyToOne
     @JoinColumn(name = "fromUserId", nullable = false)
     private User fromUser;
+
+    @OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY)
+    private List<Chat> chatList = new ArrayList<>();
 }

@@ -21,4 +21,13 @@ public class Alert {
 
     @Column(name = "text", nullable = false)
     private String text;
+
+    //양방향 관계 편의 메서드
+    public void setUser(User user) {
+        if (this.getUser() != null) {
+            this.getUser().getAlertList().remove(this);
+        }
+        user.getAlertList().add(this);
+        this.user = user;
+    }
 }

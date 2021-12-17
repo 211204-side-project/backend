@@ -34,4 +34,12 @@ public class Post {
     @JsonIgnore
     private List<Comment> commentList = new ArrayList<>();
 
+    //양방향 관계 편의 메서드
+    public void setUser(User user) {
+        if (this.getUser() != null) {
+            this.getUser().getPostList().remove(this);
+        }
+        user.getPostList().add(this);
+        this.user = user;
+    }
 }
