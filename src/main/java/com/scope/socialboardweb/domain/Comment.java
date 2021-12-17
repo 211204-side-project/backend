@@ -26,4 +26,20 @@ public class Comment {
     @Column(name = "comment", nullable = false)
     private String comment;
 
+    //양방향 관계 편의 메서드
+    public void setUser(User user) {
+        if (this.getUser() != null) {
+            this.user.getCommentList().remove(this);
+        }
+        user.getCommentList().add(this);
+        this.user = user;
+    }
+
+    public void setPost(Post post) {
+        if (this.getPost() != null) {
+            this.getPost().getCommentList().remove(this);
+        }
+        post.getCommentList().add(this);
+        this.post = post;
+    }
 }
