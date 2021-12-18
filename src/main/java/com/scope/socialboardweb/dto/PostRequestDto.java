@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 public class PostRequestDto {
     String title;
     String content;
-    String nickname;// or Long id;
     String postImgUrl;
     String postVideoUrl;
 }
