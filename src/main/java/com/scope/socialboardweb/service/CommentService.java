@@ -24,7 +24,7 @@ public class CommentService {
 
     @Transactional
     public void deleteComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(()->new IllegalAccessError("해당 댓글을 찾을 수 없습니다."));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()-> new IllegalArgumentException("해당 댓글을 찾을 수 없습니다"));
         comment.deleteComment();
         commentRepository.delete(comment);
     }
