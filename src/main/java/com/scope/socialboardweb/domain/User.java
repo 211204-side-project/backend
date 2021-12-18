@@ -25,10 +25,11 @@ public class User {
     private String nickname;
     @Column(nullable = false)
     @JsonIgnore
+    @Setter
     private String password;
     @Column(nullable = false)
     private String phoneNumber;
-    @Column(name = "profileImg")
+    @Column
     private String userImgUrl;
     @Column
     private Boolean isVerifiedEmail;

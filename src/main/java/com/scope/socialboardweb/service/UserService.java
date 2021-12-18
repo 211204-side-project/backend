@@ -13,6 +13,7 @@ import com.scope.socialboardweb.service.exception.WrongUserIdException;
 import com.scope.socialboardweb.service.exception.WrongUserPasswordException;
 import com.scope.socialboardweb.utils.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,10 +33,11 @@ public class UserService {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public User join(User user) {
+    public User signup(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -47,22 +49,24 @@ public class UserService {
         //아이디 먼저 확인
         User userById = checkLoginId(userId);
 
-        //비밀번호 확인
-        List<User> usersByPasswordList = checkLoginPassword(password);
-
-        //아이디와 비밀번호가 같은 계정의 것인지 확인
-        for (User user : usersByPasswordList) {
-            if (user == userById) { //동일한 튜플이라면, 완전히 동일한 엔티티이다.
-                return new JwtTokenDto(createToken(user));
-            }
-        }
+//        //비밀번호 확인
+//        List<User> usersByPasswordList = checkLoginPassword(password);
+//
+//        //아이디와 비밀번호가 같은 계정의 것인지 확인
+//        for (User user : usersByPasswordList) {
+//            if (user == userById) { //동일한 튜플이라면, 완전히 동일한 엔티티이다.
+//                return new JwtTokenDto(createToken(user));
+//            }
+//        }
+        if(passwordEncoder.matches(password, userById.getPassword()))
+            return new JwtTokenDto(createToken(userById));
 
         throw new WrongUserPasswordException();
     }
 
-    private boolean duplicateUserExist(User user) {
-        return userRepository.findByUserId(user.getUserId()).isPresent();
-    }
+//    private boolean duplicateUserExistByUserId(User user) {
+//        return userRepository.existsByUserId(user.getUserId());
+//    }
 
     private User checkLoginId(String userId) {
         User user = customUserRepository.findByUserId(userId).orElseThrow(

@@ -18,7 +18,7 @@ public class UserRestController {
 
     @PostMapping("/signup")
     Boolean signup(@RequestBody UserRequestDto userRequestDto) {
-        User user = userService.join(new User(userRequestDto));
+        User user = userService.signup(new User(userRequestDto));
 //        return new ResponseDto(user, "true");
         return true;
     }
