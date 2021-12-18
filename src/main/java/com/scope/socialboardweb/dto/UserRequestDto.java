@@ -1,4 +1,5 @@
 package com.scope.socialboardweb.dto;
+import com.scope.socialboardweb.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -17,4 +18,12 @@ public class UserRequestDto {
     private String nickname;
 
     private String userImgUrl;
+
+    public UserRequestDto(User user) {
+        this.userId = user.getUserId();
+        this.password = user.getPassword();
+        this.phoneNumber = user.getPhoneNumber();
+        this.nickname = user.getNickname();
+        this.userImgUrl = user.getUserImgUrl();
+    }
 }

@@ -1,6 +1,8 @@
 package com.scope.socialboardweb.utils.jwt;
 
 
+import com.scope.socialboardweb.utils.jwt.exception.NoTokenException;
+import com.scope.socialboardweb.utils.jwt.exception.WrongTokenFormatException;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,8 +66,11 @@ public class JwtTokenProvider {
      * @param authorizationHeader 요청 메시지의 헤더 중 Token이 담겨있는 Authorization 헤더의 값
      */
     private void validateAuthorizationHeader(String authorizationHeader) {
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            throw new IllegalArgumentException("jwt 토큰 형식이 틀립니다.");
+        if (authorizationHeader == null) {
+            throw new NoTokenException();
+        }
+        if (!authorizationHeader.startsWith("Bearer ")) {
+            throw new WrongTokenFormatException();
         }
     }
 
