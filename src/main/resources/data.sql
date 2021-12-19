@@ -1,0 +1,1 @@
+INSERT INTO USER (USER_Id, NICKNAME, PASSWORD, PHONE_NUMBER) VALUES ('testId', 'testNickname', 'testPassword123!', '010-1234-5678');
