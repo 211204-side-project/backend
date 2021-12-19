@@ -1,11 +1,15 @@
 package com.scope.socialboardweb.dto;
+
 import com.scope.socialboardweb.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class UserRequestDto {
     @NotNull
