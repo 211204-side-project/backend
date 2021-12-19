@@ -59,5 +59,4 @@ public class User {
     Follow와 ChatRoom에 대해, 양방향 관계로 할건지 의논 필요
      */
 
-
 }
