@@ -1,7 +1,8 @@
 package com.scope.socialboardweb.config;
 
 import com.scope.socialboardweb.interceptor.AuthorizationInterceptor;
-import com.scope.socialboardweb.utils.annotation.resolver.RequestAttributeArgumentResolver;
+import com.scope.socialboardweb.utils.resolver.RequestAttributeArgumentResolver;
+import com.scope.socialboardweb.utils.resolver.UserRequestArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -19,6 +20,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private AuthorizationInterceptor authorizationInterceptor;
+
+    @Autowired
+    private UserRequestArgumentResolver userRequestArgumentResolver;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -38,5 +42,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(requestAttributeArgumentResolver);
+        resolvers.add(userRequestArgumentResolver);
     }
 }
