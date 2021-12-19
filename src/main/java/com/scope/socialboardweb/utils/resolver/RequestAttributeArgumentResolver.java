@@ -1,4 +1,4 @@
-package com.scope.socialboardweb.utils.annotation.resolver;
+package com.scope.socialboardweb.utils.resolver;
 
 import com.scope.socialboardweb.utils.annotation.RequestAttribute;
 import org.springframework.core.MethodParameter;
