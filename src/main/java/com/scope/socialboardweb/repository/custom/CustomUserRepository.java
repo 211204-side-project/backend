@@ -25,7 +25,7 @@ public class CustomUserRepository {
 
     //조회 관련
     /**
-     * 사용자 ID (PK값 X) 으로 사용자 조회하기
+     * 사용자 ID (PK값) 으로 사용자 조회하기
      * @param id 사용자의 pk값
      * @return 조회 결과가 없으면 null 반환
      */
