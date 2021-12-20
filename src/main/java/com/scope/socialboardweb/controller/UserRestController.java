@@ -22,8 +22,7 @@ public class UserRestController {
      */
     @PostMapping(value = "/signup", consumes = "application/json")
     Boolean signupByJson(@RequestBody UserRequestDto userRequestDto) {
-        User user = userService.join(new User(userRequestDto));
-//        return new ResponseDto(user, "true");
+        User user = userService.signup(userRequestDto);
         return true;
     }
 
@@ -34,8 +33,7 @@ public class UserRestController {
      */
     @PostMapping(value = "/signup", consumes = "application/x-www-form-urlencoded")
     Boolean signupByForm(@ModelAttribute UserRequestDto userRequestDto) {
-        User user = userService.join(new User(userRequestDto));
-//        return new ResponseDto(user, "true");
+        User user = userService.signup(userRequestDto);
         return true;
     }
 

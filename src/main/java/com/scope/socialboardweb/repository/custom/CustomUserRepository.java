@@ -97,7 +97,6 @@ public class CustomUserRepository {
 
     public void delete(User user) {
         em.remove(user);
-        em.clear();
     }
 
     /**
