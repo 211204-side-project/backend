@@ -97,6 +97,7 @@ public class CustomUserRepository {
 
     public void delete(User user) {
         em.remove(user);
+        em.clear();
     }
 
     /**
@@ -108,5 +109,6 @@ public class CustomUserRepository {
         em.createQuery(jpql)
             .setParameter("id", id)
             .executeUpdate();
+        em.clear();
     }
 }
