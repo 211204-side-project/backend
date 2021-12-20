@@ -2,8 +2,10 @@ package com.scope.socialboardweb.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class CommentResponseDto {
     private Long commentId;

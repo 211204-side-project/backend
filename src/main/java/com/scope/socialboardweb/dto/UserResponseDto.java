@@ -3,9 +3,11 @@ package com.scope.socialboardweb.dto;
 import com.scope.socialboardweb.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@RequiredArgsConstructor
 @Getter
+@Setter
+@RequiredArgsConstructor
 public class UserResponseDto {
     private String accessToken;
     private String userId;
