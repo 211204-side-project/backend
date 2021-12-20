@@ -1,11 +1,9 @@
 package com.scope.socialboardweb.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class CommentRequestDto {
     private Long userId;

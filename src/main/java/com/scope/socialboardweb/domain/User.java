@@ -38,15 +38,6 @@ public class User {
     @Column
     private Boolean isVerifiedEmail;
 
-//    public User(UserRequestDto userRequestDto) {
-//        this.userId = userRequestDto.getUserId();
-//        this.nickname = userRequestDto.getNickname();
-//        this.password = userRequestDto.getPassword();
-//        this.phoneNumber = userRequestDto.getPhoneNumber();
-//        this.userImgUrl = userRequestDto.getUserImgUrl();
-//        this.isVerifiedEmail = false;
-//    }
-
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Post> postList = new ArrayList<>();
@@ -59,8 +50,21 @@ public class User {
     @JsonIgnore
     private List<Alert> alertList = new ArrayList<>();
 
-    /* TODO
-    Follow와 ChatRoom에 대해, 양방향 관계로 할건지 의논 필요
-     */
+    public User(String userId, String nickname, String password, String phoneNumber) {
+        this.userId = userId;
+        this.nickname = nickname;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(UserRequestDto userRequestDto) {
+        this.userId = userRequestDto.getUserId();
+        this.nickname = userRequestDto.getNickname();
+        this.password = userRequestDto.getPassword();
+        this.phoneNumber = userRequestDto.getPhoneNumber();
+        if(userRequestDto.getUserImgUrl() != null) this.userImgUrl = userRequestDto.getUserImgUrl();
+        this.isVerifiedEmail = false;
+    }
+
 
 }

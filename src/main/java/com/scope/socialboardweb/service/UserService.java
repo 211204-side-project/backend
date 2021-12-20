@@ -54,15 +54,6 @@ public class UserService {
         //아이디 먼저 확인
         User userByUserId = checkLoginId(userId);
 
-//        //비밀번호 확인
-//        List<User> usersByPasswordList = checkLoginPassword(password);
-//
-//        //아이디와 비밀번호가 같은 계정의 것인지 확인
-//        for (User user : usersByPasswordList) {
-//            if (user == userByUserId) { //동일한 튜플이라면, 완전히 동일한 엔티티이다.
-//                return new JwtTokenDto(createToken(user));
-//            }
-//        }
         if (passwordEncoder.matches(password, userByUserId.getPassword()))
             return new JwtTokenDto(createToken(userByUserId));
 

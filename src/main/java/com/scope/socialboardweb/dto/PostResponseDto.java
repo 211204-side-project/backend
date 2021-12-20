@@ -2,10 +2,12 @@ package com.scope.socialboardweb.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Setter
 @RequiredArgsConstructor
 public class PostResponseDto {
     @NotNull

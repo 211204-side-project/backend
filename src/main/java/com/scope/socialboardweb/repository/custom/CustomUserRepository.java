@@ -108,5 +108,6 @@ public class CustomUserRepository {
         em.createQuery(jpql)
             .setParameter("id", id)
             .executeUpdate();
+        em.clear();
     }
 }
