@@ -4,8 +4,10 @@ import com.scope.socialboardweb.domain.Post;
 import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.PostRequestDto;
 import com.scope.socialboardweb.dto.PostResponseDto;
+import com.scope.socialboardweb.dto.UserRequestDto;
 import com.scope.socialboardweb.repository.PostRepository;
 import com.scope.socialboardweb.repository.UserRepository;
+import com.scope.socialboardweb.service.exception.UserNotAuthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,11 @@ public class PostService {
     @Autowired
     UserRepository userRepository;
 
-    public PostResponseDto createPost(PostRequestDto postRequestDto, Long user_id) {
-        Optional<User> user = userRepository.findById(user_id);
+    public PostResponseDto createPost(PostRequestDto postRequestDto, UserRequestDto userRequestDto /*user의 id*/) {
+        String userId = userRequestDto.getUserId();
+        Optional<User> user = userRepository.findByUserId(userId);
         if(user.isPresent()){
+            //post 저장, postId 추출
             Long postId = postRepository.save(new Post(postRequestDto, user.get())).getId();
             return new PostResponseDto(true, postId);
         } else return new PostResponseDto(false);
@@ -31,9 +35,11 @@ public class PostService {
         return postRepository.findById(postId);
     }
 
-    public boolean updatePost(Long postId, PostRequestDto postRequestDto) {
+    public boolean updatePost(Long postId, PostRequestDto postRequestDto, UserRequestDto userRequestDto) {
         Optional<Post> post = postRepository.findById(postId);
         if(post.isPresent()){
+            if(!post.get().getUser().getUserId().equals(userRequestDto.getUserId()))
+                throw new UserNotAuthorizedException();
             post.get().setTitle(postRequestDto.getTitle());
             post.get().setContent(postRequestDto.getContent());
             post.get().setPostImgUrl(postRequestDto.getPostImgUrl());
@@ -45,8 +51,11 @@ public class PostService {
         }
     }
 
-    public boolean deletePost(Long postId) {
-        if(postRepository.existsById(postId)) {
+    public boolean deletePost(Long postId, UserRequestDto userRequestDto) {
+        Optional<Post> post = postRepository.findById(postId);
+        if(post.isPresent()) {
+            if(!post.get().getUser().getUserId().equals(userRequestDto.getUserId()))
+                throw new UserNotAuthorizedException();
             postRepository.deleteById(postId);
             return true;
         } else { return false; }
