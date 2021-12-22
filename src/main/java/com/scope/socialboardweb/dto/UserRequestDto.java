@@ -14,6 +14,9 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class UserRequestDto {
+
+    @NotNull
+    private User userEntity;
     @NotNull
     private String userId;
     @NotNull
@@ -26,6 +29,7 @@ public class UserRequestDto {
     private String userImgUrl;
 
     public UserRequestDto(User user) {
+        this.userEntity = user;
         this.userId = user.getUserId();
         this.password = user.getPassword();
         this.phoneNumber = user.getPhoneNumber();

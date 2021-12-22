@@ -26,6 +26,7 @@ public class GetUserFromTokenTestController {
 //        @RequestAttribute("loginUser") @Parameter(hidden = true) UserRequestDto userRequestDto
         @LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto
         ) {
+        log.info("Login User Entity: {}", userRequestDto.getUserEntity());
         log.info("Login User Id: {}", userRequestDto.getUserId());
         log.info("Login User Nickname: {}", userRequestDto.getNickname());
         log.info("Login User Password: {}", userRequestDto.getPassword());
