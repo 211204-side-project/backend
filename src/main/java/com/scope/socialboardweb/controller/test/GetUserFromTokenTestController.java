@@ -5,11 +5,11 @@ import com.scope.socialboardweb.dto.UserLoginDto;
 import com.scope.socialboardweb.dto.UserRequestDto;
 import com.scope.socialboardweb.utils.annotation.LoginUser;
 import com.scope.socialboardweb.utils.annotation.RequestAttribute;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequestMapping("/test")
@@ -20,11 +20,11 @@ public class GetUserFromTokenTestController {
      * @RequestAttribute("loginUser") 나
      * @LoginUser 모두 동일한 기능을 한다.
      */
-
-    @PostMapping("/user")
+    @Operation(description = "헤더로 전달된 토큰에서, 유저 정보 뽑아 응답")
+    @GetMapping("/user")
     ResponseDto test(
-//        @RequestAttribute("loginUser") UserRequestDto userRequestDto
-        @LoginUser UserRequestDto userRequestDto
+//        @RequestAttribute("loginUser") @Parameter(hidden = true) UserRequestDto userRequestDto
+        @LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto
         ) {
         log.info("Login User Id: {}", userRequestDto.getUserId());
         log.info("Login User Nickname: {}", userRequestDto.getNickname());
