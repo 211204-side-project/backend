@@ -1,5 +1,6 @@
 package com.scope.socialboardweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.scope.socialboardweb.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class UserRequestDto {
 
     @NotNull
+    @JsonIgnore
     private User userEntity;
     @NotNull
     private String userId;
