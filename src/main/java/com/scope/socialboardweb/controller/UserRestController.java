@@ -4,6 +4,7 @@ import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,7 @@ public class UserRestController {
      * 요청 msg의 Content-Type 헤더가 application/json 일 때,
      * 매핑
      */
+    @Operation(summary = "로그인")
     @PostMapping(value = "/signin", consumes = "application/json")
     ResponseDto signinByJson(@RequestBody UserLoginDto userLoginDto) {
         JwtTokenDto tokenDto = userService.login(userLoginDto);
