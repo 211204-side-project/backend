@@ -4,10 +4,13 @@ import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "UserController",description = "유저 관련 API")
 @Slf4j
 @RestController
 @RequestMapping("/api/user")
@@ -20,6 +23,7 @@ public class UserRestController {
      * 요청 msg의 헤더 부분이 application/json 일 때,
      * 매핑
      */
+    @Operation(summary = "User 회원가입, json 형식")
     @PostMapping(value = "/signup", consumes = "application/json")
     Boolean signupByJson(@RequestBody UserRequestDto userRequestDto) {
         User user = userService.signup(userRequestDto);
@@ -31,6 +35,7 @@ public class UserRestController {
      * 요청 msg의 Content-Type 헤더가 application/x-www-form-urlencoded 일 때,
      * 매핑
      */
+    @Operation(summary = "User 회원가입, form 형식")
     @PostMapping(value = "/signup", consumes = "application/x-www-form-urlencoded")
     Boolean signupByForm(@ModelAttribute UserRequestDto userRequestDto) {
         User user = userService.signup(userRequestDto);
@@ -42,6 +47,7 @@ public class UserRestController {
      * 요청 msg의 Content-Type 헤더가 application/json 일 때,
      * 매핑
      */
+    @Operation(summary = "User 로그인, json 형식")
     @PostMapping(value = "/signin", consumes = "application/json")
     ResponseDto signinByJson(@RequestBody UserLoginDto userLoginDto) {
         JwtTokenDto tokenDto = userService.login(userLoginDto);
@@ -53,6 +59,7 @@ public class UserRestController {
      * 요청 msg의 Content-Type 헤더가 application/x-www-form-urlencoded 일 때,
      * 매핑
      */
+    @Operation(summary = "User 로그인, form 형식")
     @PostMapping(value = "/signin", consumes = "application/x-www-form-urlencoded")
     ResponseDto signinByForm(@ModelAttribute UserLoginDto userLoginDto) {
         JwtTokenDto tokenDto = userService.login(userLoginDto);
