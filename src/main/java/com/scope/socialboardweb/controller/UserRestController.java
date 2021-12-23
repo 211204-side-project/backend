@@ -4,7 +4,9 @@ import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.service.UserService;
+import com.scope.socialboardweb.utils.annotation.LoginUser;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -59,5 +61,12 @@ public class UserRestController {
     ResponseDto signinByForm(@ModelAttribute UserLoginDto userLoginDto) {
         JwtTokenDto tokenDto = userService.login(userLoginDto);
         return new ResponseDto(tokenDto, "Signin succeeded");
+    }
+
+    @Operation(summary = "유저 정보")
+    @GetMapping(value = "/self")
+    ResponseDto getUserSelf(@LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto) {
+        UserResponseDto userResponseDto = new UserResponseDto(userRequestDto.getUserEntity());
+        return new ResponseDto(userResponseDto, "User's Information");
     }
 }
