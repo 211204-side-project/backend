@@ -17,18 +17,18 @@ public class UserAuthController {
     UserService userService;
 
     @Operation(summary = "accountId 중복 체크")
-    @PostMapping("/accountId")
-    Boolean isNotDuplicateAccountId(@RequestBody AuthAccountIdDto authAccountIdDto) {
+    @PostMapping(value = "/accountId", consumes = "application/x-www-form-urlencoded")
+    Boolean isNotDuplicateAccountId(@ModelAttribute AuthAccountIdDto authAccountIdDto) {
         return userService.isNotDuplicateAccountId(authAccountIdDto.getAccountId());
     }
     @Operation(summary = "phoneNumber 중복 체크")
-    @PostMapping("/phoneNumber")
-    Boolean isNotDuplicatePhoneNumber(@RequestBody AuthPhoneNumberDto authPhoneNumberDto) {
+    @PostMapping(value = "/phoneNumber", consumes = "application/x-www-form-urlencoded")
+    Boolean isNotDuplicatePhoneNumber(@ModelAttribute AuthPhoneNumberDto authPhoneNumberDto) {
         return userService.isNotDuplicatePhoneNumber(authPhoneNumberDto.getPhoneNumber());
     }
     @Operation(summary = "nickname 중복 체크")
-    @PostMapping("/nickname")
-    Boolean isNotDuplicateNickname(@RequestBody AuthNicknameDto authNicknameDto) {
+    @PostMapping(value = "/nickname", consumes = "application/x-www-form-urlencoded")
+    Boolean isNotDuplicateNickname(@ModelAttribute AuthNicknameDto authNicknameDto) {
         return userService.isNotDuplicateNickname(authNicknameDto.getNickname());
     }
 }
