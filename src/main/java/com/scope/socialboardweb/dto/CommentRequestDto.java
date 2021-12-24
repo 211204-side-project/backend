@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 public class CommentRequestDto {
-    private Long accountId;
+    private Long userId;
     private String comment;
     private Long postId;
 }
