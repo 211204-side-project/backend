@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUserId(String userId);
+    Optional<User> findByAccountId(String accountId);
     Optional<User> findByPhoneNumber(String phoneNumber);
     Optional<User> findByNickname(String nickname);
-//    boolean existsByUserId(String userId);
+//    boolean existsByAccountId(String accountId);
 }
 

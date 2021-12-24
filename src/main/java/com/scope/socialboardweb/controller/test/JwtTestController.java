@@ -39,7 +39,7 @@ public class JwtTestController {
     @GetMapping("/user")
     ResponseDto test(@LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto) {
         log.info("Login User Entity: {}", userRequestDto.getUserEntity());
-        log.info("Login User Id: {}", userRequestDto.getUserId());
+        log.info("Login User AccountId: {}", userRequestDto.getAccountId());
         log.info("Login User Nickname: {}", userRequestDto.getNickname());
         log.info("Login User Password: {}", userRequestDto.getPassword());
         return new ResponseDto(userRequestDto, "전달받은 토큰으로 가져온 유저");

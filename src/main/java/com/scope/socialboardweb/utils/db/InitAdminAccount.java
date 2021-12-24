@@ -19,7 +19,7 @@ public class InitAdminAccount {
     @PostConstruct
     public void init() {
         User user = User.builder()
-            .userId("admin")
+            .accountId("admin")
             .nickname("admin")
             .password(passwordEncoder.encode("admin123!"))
             .phoneNumber("010-1234-5678")

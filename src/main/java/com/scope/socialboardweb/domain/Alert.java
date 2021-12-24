@@ -16,7 +16,7 @@ public class Alert {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "accountId", nullable = false)
     private User user;
 
     @Column(name = "text", nullable = false)

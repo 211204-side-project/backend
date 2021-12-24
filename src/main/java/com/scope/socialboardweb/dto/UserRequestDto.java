@@ -20,7 +20,7 @@ public class UserRequestDto {
     @JsonIgnore
     private User userEntity;
     @NotNull
-    private String userId;
+    private String accountId;
     @NotNull
     private String password;
     @NotNull
@@ -32,7 +32,7 @@ public class UserRequestDto {
 
     public UserRequestDto(User user) {
         this.userEntity = user;
-        this.userId = user.getUserId();
+        this.accountId = user.getAccountId();
         this.password = user.getPassword();
         this.phoneNumber = user.getPhoneNumber();
         this.nickname = user.getNickname();

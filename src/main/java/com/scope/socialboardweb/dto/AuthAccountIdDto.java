@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class AuthUserIdDto {
-    String userId;
+public class AuthAccountIdDto {
+    String accountId;
 }

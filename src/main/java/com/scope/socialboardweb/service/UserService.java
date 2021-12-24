@@ -4,7 +4,7 @@ import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.repository.custom.CustomUserRepository;
-import com.scope.socialboardweb.service.exception.WrongUserIdException;
+import com.scope.socialboardweb.service.exception.WrongAccountIdException;
 import com.scope.socialboardweb.service.exception.WrongUserPasswordException;
 import com.scope.socialboardweb.utils.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class UserService {
 //    }
     public User signup(UserRequestDto userRequestDto) {
         User user = User.builder()
-                .userId(userRequestDto.getUserId())
+                .accountId(userRequestDto.getAccountId())
                 .nickname(userRequestDto.getNickname())
                 .password(passwordEncoder.encode(userRequestDto.getPassword()))
                 .phoneNumber(userRequestDto.getPhoneNumber())
@@ -48,25 +48,25 @@ public class UserService {
 
     @Transactional
     public JwtTokenDto login(UserLoginDto userLoginDto) {
-        String userId = userLoginDto.getUserId();
+        String accountId = userLoginDto.getAccountId();
         String password = userLoginDto.getPassword();
 
         //아이디 먼저 확인
-        User userByUserId = checkLoginId(userId);
+        User userByAccountId = checkLoginId(accountId);
 
-        if (passwordEncoder.matches(password, userByUserId.getPassword()))
-            return new JwtTokenDto(createToken(userByUserId));
+        if (passwordEncoder.matches(password, userByAccountId.getPassword()))
+            return new JwtTokenDto(createToken(userByAccountId));
 
         throw new WrongUserPasswordException();
     }
 
-//    private boolean duplicateUserExistByUserId(User user) {
-//        return userRepository.existsByUserId(user.getUserId());
+//    private boolean duplicateUserExistByAccountId(User user) {
+//        return userRepository.existsByAccountId(user.getAccountId());
 //    }
 
-    private User checkLoginId(String userId) {
-        User user = customUserRepository.findByUserId(userId).orElseThrow(
-                () -> new WrongUserIdException()
+    private User checkLoginId(String accountId) {
+        User user = customUserRepository.findByAccountId(accountId).orElseThrow(
+                () -> new WrongAccountIdException()
         );
         return user;
     }
@@ -83,8 +83,8 @@ public class UserService {
         return tokenProvider.createJwtToken(user.getId());
     }
 
-    public Boolean isNotDuplicateUserId(String userId) {
-        return userRepository.findByUserId(userId).isEmpty();
+    public Boolean isNotDuplicateAccountId(String accountId) {
+        return userRepository.findByAccountId(accountId).isEmpty();
     }
 
     public Boolean isNotDuplicatePhoneNumber(String phoneNumber) {
@@ -101,7 +101,7 @@ public class UserService {
     }
 
 //    private boolean duplicateUserExist(User user) {
-//        return userRepository.findByUserId(user.getUserId()).isPresent();
+//        return userRepository.findByAccountId(user.getAccountId()).isPresent();
 //    }
 
 }
