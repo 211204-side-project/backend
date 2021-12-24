@@ -16,11 +16,11 @@ public class Follow {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fromUserId", nullable = false)
+    @JoinColumn(name = "fromAccountId", nullable = false)
     private User fromUser;
 
     @ManyToOne
-    @JoinColumn(name = "toUserId", nullable = false)
+    @JoinColumn(name = "toAccountId", nullable = false)
     private User toUser;
 
 

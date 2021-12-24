@@ -25,7 +25,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String accountId;
     @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)
@@ -50,15 +50,15 @@ public class User {
     @JsonIgnore
     private List<Alert> alertList = new ArrayList<>();
 
-    public User(String userId, String nickname, String password, String phoneNumber) {
-        this.userId = userId;
+    public User(String accountId, String nickname, String password, String phoneNumber) {
+        this.accountId = accountId;
         this.nickname = nickname;
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
 
     public User(UserRequestDto userRequestDto) {
-        this.userId = userRequestDto.getUserId();
+        this.accountId = userRequestDto.getAccountId();
         this.nickname = userRequestDto.getNickname();
         this.password = userRequestDto.getPassword();
         this.phoneNumber = userRequestDto.getPhoneNumber();

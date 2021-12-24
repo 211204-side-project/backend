@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class UserResponseDto {
-    private String userId;
+    private String accountId;
     private String nickname;
     private String phoneNumber;
     /*TODO
@@ -17,7 +17,7 @@ public class UserResponseDto {
     */
 
     public UserResponseDto(User user) {
-        this.userId = user.getUserId();
+        this.accountId = user.getAccountId();
         this.nickname = user.getNickname();
         this.phoneNumber = user.getPhoneNumber();
     }

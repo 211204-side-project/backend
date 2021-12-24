@@ -71,9 +71,9 @@ class CustomUserRepositoryTest {
         );
     }
 
-    @DisplayName("저장 및 조회 - findByUserId")
+    @DisplayName("저장 및 조회 - findByAccountId")
     @Test
-    void saveAndFindByUserId() {
+    void saveAndFindByAccountId() {
         //given
         User user = new User("testUniqueId", "testNickname", "testPassword", "010-1234-1234");
 
@@ -83,8 +83,8 @@ class CustomUserRepositoryTest {
         //then
         assertAll(
             () -> {assertSame(true, savedUser.isPresent());},
-            () -> {assertEquals(user, repository.findByUserId(savedUser.get().getUserId()).get());},
-            () -> {assertSame(user, repository.findByUserId(savedUser.get().getUserId()).get());}
+            () -> {assertEquals(user, repository.findByAccountId(savedUser.get().getAccountId()).get());},
+            () -> {assertSame(user, repository.findByAccountId(savedUser.get().getAccountId()).get());}
         );
     }
 
@@ -113,17 +113,17 @@ class CustomUserRepositoryTest {
 
     }
 
-    @DisplayName("저장 및 조회 - findByUserIdAndPassword")
+    @DisplayName("저장 및 조회 - findByAccountIdAndPassword")
     @Test
-    void saveAndFindByUserIdAndPassword() {
+    void saveAndFindByAccountIdAndPassword() {
         //given
-        String userId = "testUniqueId";
+        String accountId = "testUniqueId";
         String pw = "testPassword";
-        User user = new User(userId, "testNickname", pw, "010-1234-1234");
+        User user = new User(accountId, "testNickname", pw, "010-1234-1234");
 
         //when
         repository.save(user);
-        Optional<User> result = repository.findByUserIdAndPassword(userId, pw);
+        Optional<User> result = repository.findByAccountIdAndPassword(accountId, pw);
 
         //then
 

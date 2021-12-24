@@ -2,7 +2,7 @@ package com.scope.socialboardweb.controller;
 
 import com.scope.socialboardweb.dto.AuthNicknameDto;
 import com.scope.socialboardweb.dto.AuthPhoneNumberDto;
-import com.scope.socialboardweb.dto.AuthUserIdDto;
+import com.scope.socialboardweb.dto.AuthAccountIdDto;
 import com.scope.socialboardweb.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,10 +16,10 @@ public class UserAuthController {
     @Autowired
     UserService userService;
 
-    @Operation(summary = "userId(사용자 로그인 시 id) 중복 체크")
-    @PostMapping("/userId")
-    Boolean isNotDuplicateUserId(@RequestBody AuthUserIdDto authUserIdDto) {
-        return userService.isNotDuplicateUserId(authUserIdDto.getUserId());
+    @Operation(summary = "accountId 중복 체크")
+    @PostMapping("/accountId")
+    Boolean isNotDuplicateAccountId(@RequestBody AuthAccountIdDto authAccountIdDto) {
+        return userService.isNotDuplicateAccountId(authAccountIdDto.getAccountId());
     }
     @Operation(summary = "phoneNumber 중복 체크")
     @PostMapping("/phoneNumber")

@@ -10,11 +10,11 @@ import lombok.Setter;
 public class CommentResponseDto {
     private Long commentId;
     private String commnet;
-    private Long userId;
+    private Long accountId;
 
-    public CommentResponseDto(Long commentId, Long userId, String comment) {
+    public CommentResponseDto(Long commentId, Long accountId, String comment) {
         this.commentId = commentId;
-        this.userId = userId;
+        this.accountId = accountId;
         this.commnet = comment;
     }
 }

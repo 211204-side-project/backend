@@ -18,11 +18,11 @@ public class ChatRoom {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "toUserId", nullable = false)
+    @JoinColumn(name = "toAccountId", nullable = false)
     private User toUser;
 
     @ManyToOne
-    @JoinColumn(name = "fromUserId", nullable = false)
+    @JoinColumn(name = "fromAccountId", nullable = false)
     private User fromUser;
 
     @OneToMany(mappedBy = "chatRoom", fetch = FetchType.LAZY)

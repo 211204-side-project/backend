@@ -27,7 +27,7 @@ public class CommentController {
     @PostMapping("/api/comment")
     public ResponseDto saveComment(@RequestBody CommentRequestDto requestDto ){
 
-        User user = userService.findUserById(requestDto.getUserId());
+        User user = userService.findUserById(requestDto.getAccountId());
         Post post = postService.findPostByPostId(requestDto.getPostId());
         commentService.saveComment(user,post,requestDto.getComment());
         return new ResponseDto(true,"댓글이 작성되었습니다");

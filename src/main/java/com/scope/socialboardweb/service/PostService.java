@@ -21,12 +21,13 @@ public class PostService {
     @Autowired
     UserRepository userRepository;
 
-    public PostResponseDto createPost(PostRequestDto postRequestDto, UserRequestDto userRequestDto /*user의 id*/) {
-        String userId = userRequestDto.getUserId();
-        Optional<User> user = userRepository.findByUserId(userId);
+    public PostResponseDto createPost(PostRequestDto postRequestDto, UserRequestDto userRequestDto) {
+        Long userId = userRequestDto.getUserEntity().getId();
+        Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
             //post 저장, postId 추출
-            Long postId = postRepository.save(new Post(postRequestDto, user.get())).getId();
+            Post post = new Post(postRequestDto, user.get());
+            Long postId = postRepository.save(post).getId();
             return new PostResponseDto(true, postId);
         } else return new PostResponseDto(false);
     }
@@ -38,8 +39,9 @@ public class PostService {
     public boolean updatePost(Long postId, PostRequestDto postRequestDto, UserRequestDto userRequestDto) {
         Optional<Post> post = postRepository.findById(postId);
         if(post.isPresent()){
-            if(!post.get().getUser().getUserId().equals(userRequestDto.getUserId()))
+            if (!post.get().getUser().getId().equals(userRequestDto.getUserEntity().getId())) {
                 throw new UserNotAuthorizedException();
+            }
             post.get().setTitle(postRequestDto.getTitle());
             post.get().setContent(postRequestDto.getContent());
             post.get().setPostImgUrl(postRequestDto.getPostImgUrl());
@@ -54,8 +56,9 @@ public class PostService {
     public boolean deletePost(Long postId, UserRequestDto userRequestDto) {
         Optional<Post> post = postRepository.findById(postId);
         if(post.isPresent()) {
-            if(!post.get().getUser().getUserId().equals(userRequestDto.getUserId()))
+            if (!post.get().getUser().getId().equals(userRequestDto.getUserEntity().getId())) {
                 throw new UserNotAuthorizedException();
+            }
             postRepository.deleteById(postId);
             return true;
         } else { return false; }
@@ -64,7 +67,6 @@ public class PostService {
     public Post findPostByPostId(Long postId){
         Post post = postRepository.findById(postId).orElseThrow(()->new IllegalArgumentException("해당 포스트를 찾을 수 없습니다."));
         return post;
-
     }
 
 

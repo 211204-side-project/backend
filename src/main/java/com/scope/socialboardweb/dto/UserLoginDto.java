@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserLoginDto {
     @NotNull
-    private String userId;
+    private String accountId;
 
     @NotNull
     private String password;
