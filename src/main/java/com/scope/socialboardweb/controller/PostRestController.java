@@ -37,7 +37,7 @@ public class PostRestController {
     }
 
     @Operation(summary = "게시물 수정")
-    @PutMapping(value = "/{postId}", consumes = "application/x-www-form-urlencoded")
+    @PatchMapping(value = "/{postId}", consumes = "application/x-www-form-urlencoded")
     boolean updatePost(@PathVariable Long postId, @ModelAttribute PostRequestDto postRequestDto, @LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto) {
         return postService.updatePost(postId, postRequestDto, userRequestDto);
     }

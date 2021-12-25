@@ -18,17 +18,37 @@ public class UserAuthController {
 
     @Operation(summary = "accountId 중복 체크")
     @PostMapping(value = "/accountId", consumes = "application/x-www-form-urlencoded")
-    Boolean isNotDuplicateAccountId(@ModelAttribute AuthAccountIdDto authAccountIdDto) {
+    Boolean isNotDuplicateAccountIdByForm(@ModelAttribute AuthAccountIdDto authAccountIdDto) {
         return userService.isNotDuplicateAccountId(authAccountIdDto.getAccountId());
     }
+
+    //JSON 버전 accountId 중복 체크
+    @PostMapping(value = "/accountId", consumes = "application/json")
+    Boolean isNotDuplicateAccountIdByJson(@RequestBody AuthAccountIdDto authAccountIdDto) {
+        return userService.isNotDuplicateAccountId(authAccountIdDto.getAccountId());
+    }
+
     @Operation(summary = "phoneNumber 중복 체크")
     @PostMapping(value = "/phoneNumber", consumes = "application/x-www-form-urlencoded")
-    Boolean isNotDuplicatePhoneNumber(@ModelAttribute AuthPhoneNumberDto authPhoneNumberDto) {
+    Boolean isNotDuplicatePhoneNumberByForm(@ModelAttribute AuthPhoneNumberDto authPhoneNumberDto) {
         return userService.isNotDuplicatePhoneNumber(authPhoneNumberDto.getPhoneNumber());
     }
+
+    //JSON 버전 phoneNumber 중복 체크
+    @PostMapping(value = "/phoneNumber", consumes = "application/json")
+    Boolean isNotDuplicatePhoneNumberByJson(@RequestBody AuthPhoneNumberDto authPhoneNumberDto) {
+        return userService.isNotDuplicatePhoneNumber(authPhoneNumberDto.getPhoneNumber());
+    }
+
     @Operation(summary = "nickname 중복 체크")
     @PostMapping(value = "/nickname", consumes = "application/x-www-form-urlencoded")
-    Boolean isNotDuplicateNickname(@ModelAttribute AuthNicknameDto authNicknameDto) {
+    Boolean isNotDuplicateNicknameByJson(@ModelAttribute AuthNicknameDto authNicknameDto) {
+        return userService.isNotDuplicateNickname(authNicknameDto.getNickname());
+    }
+
+    //JSON 버전 nickname 중복 체크
+    @PostMapping(value = "/nickname", consumes = "application/json")
+    Boolean isNotDuplicateNicknameByForm(@RequestBody AuthNicknameDto authNicknameDto) {
         return userService.isNotDuplicateNickname(authNicknameDto.getNickname());
     }
 }
