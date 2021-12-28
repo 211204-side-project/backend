@@ -2,7 +2,6 @@ package com.scope.socialboardweb.controller;
 
 import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.*;
-import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.service.UserService;
 import com.scope.socialboardweb.utils.annotation.LoginUser;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,9 +50,9 @@ public class UserRestController {
      */
     @Operation(summary = "User 로그인, json 형식")
     @PostMapping(value = "/signin", consumes = "application/json")
-    ResponseDto signinByJson(@RequestBody UserLoginDto userLoginDto) {
-        JwtTokenDto tokenDto = userService.login(userLoginDto);
-        return new ResponseDto(tokenDto, "Signin succeeded");
+    ResponseDto signinByJson(@RequestBody LoginRequestDto loginRequestDto) {
+        LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
+        return new ResponseDto(loginResponseDto, "Signin succeeded");
     }
 
     /**
@@ -63,9 +62,9 @@ public class UserRestController {
      */
     @Operation(summary = "User 로그인, form 형식")
     @PostMapping(value = "/signin", consumes = "application/x-www-form-urlencoded")
-    ResponseDto signinByForm(@ModelAttribute UserLoginDto userLoginDto) {
-        JwtTokenDto tokenDto = userService.login(userLoginDto);
-        return new ResponseDto(tokenDto, "Signin succeeded");
+    ResponseDto signinByForm(@ModelAttribute LoginRequestDto loginRequestDto) {
+        LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
+        return new ResponseDto(loginResponseDto, "Signin succeeded");
     }
 
     @Operation(summary = "유저 정보")
