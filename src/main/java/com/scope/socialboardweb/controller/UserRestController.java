@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+//@RequestMapping("/api/user")
 public class UserRestController {
 
     private final UserService userService;
@@ -27,7 +27,7 @@ public class UserRestController {
      * 매핑
      */
     @Operation(summary = "User 회원가입, json 형식")
-    @PostMapping(value = "/signup", consumes = "application/json")
+    @PostMapping(value = "/api/user/signup", consumes = "application/json")
     Boolean signupByJson(@RequestBody UserRequestDto userRequestDto) {
         User user = userService.signup(userRequestDto);
         return true;
@@ -39,7 +39,7 @@ public class UserRestController {
      * 매핑
      */
     @Operation(summary = "User 회원가입, form 형식")
-    @PostMapping(value = "/signup", consumes = "application/x-www-form-urlencoded")
+    @PostMapping(value = "/api/user/signup", consumes = "application/x-www-form-urlencoded")
     Boolean signupByForm(@ModelAttribute UserRequestDto userRequestDto) {
         User user = userService.signup(userRequestDto);
         return true;
@@ -51,7 +51,7 @@ public class UserRestController {
      * 매핑
      */
     @Operation(summary = "User 로그인, json 형식")
-    @PostMapping(value = "/signin", consumes = "application/json")
+    @PostMapping(value = "/api/user/signin", consumes = "application/json")
     ResponseDto signinByJson(@RequestBody LoginRequestDto loginRequestDto) {
         LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
         return new ResponseDto(loginResponseDto, "Signin succeeded");
@@ -63,14 +63,14 @@ public class UserRestController {
      * 매핑
      */
     @Operation(summary = "User 로그인, form 형식")
-    @PostMapping(value = "/signin", consumes = "application/x-www-form-urlencoded")
+    @PostMapping(value = "/api/user/signin", consumes = "application/x-www-form-urlencoded")
     ResponseDto signinByForm(@ModelAttribute LoginRequestDto loginRequestDto) {
         LoginResponseDto loginResponseDto = userService.login(loginRequestDto);
         return new ResponseDto(loginResponseDto, "Signin succeeded");
     }
 
     @Operation(summary = "유저 정보")
-    @GetMapping(value = "/self")
+    @GetMapping(value = "/api/user/self")
     ResponseDto getUserSelf(@LoginUser @Parameter(hidden = true) UserRequestDto userRequestDto) {
         UserResponseDto userResponseDto = new UserResponseDto(userRequestDto.getUserEntity());
         return new ResponseDto(userResponseDto, "User's Information");
