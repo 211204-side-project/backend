@@ -11,11 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -47,15 +44,16 @@ public class UserService {
     }
 
     @Transactional
-    public JwtTokenDto login(UserLoginDto userLoginDto) {
-        String accountId = userLoginDto.getAccountId();
-        String password = userLoginDto.getPassword();
+    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+        String accountId = loginRequestDto.getAccountId();
+        String password = loginRequestDto.getPassword();
 
-        //아이디 먼저 확인
+        //아이디로 유저 확인
         User userByAccountId = checkLoginId(accountId);
 
+        //비밀번호로 유저 확인
         if (passwordEncoder.matches(password, userByAccountId.getPassword()))
-            return new JwtTokenDto(createToken(userByAccountId));
+            return new LoginResponseDto(createToken(userByAccountId), userByAccountId);
 
         throw new WrongUserPasswordException();
     }

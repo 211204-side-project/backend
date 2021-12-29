@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginDto {
+public class LoginRequestDto {
     @NotNull
     private String accountId;
 
