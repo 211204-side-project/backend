@@ -29,11 +29,13 @@ public class LoginResponseDto {
     @NotNull
     private Boolean isAdmin;
 
+    private String userImgUrl;
+
     /*TODO
     프로필 사진 필드까지 포함해야 함
      */
 
-    public LoginResponseDto(JwtTokenDto tokenDto, Long id, String accountId, String nickname, String phoneNumber, Boolean isVerifiedEmail, Boolean isAdmin) {
+    public LoginResponseDto(JwtTokenDto tokenDto, Long id, String accountId, String nickname, String phoneNumber, Boolean isVerifiedEmail, Boolean isAdmin, String userImgUrl) {
         this.token = tokenDto.getToken();
         this.id = id;
         this.accountId = accountId;
@@ -41,6 +43,7 @@ public class LoginResponseDto {
         this.phoneNumber = phoneNumber;
         this.isVerifiedEmail = isVerifiedEmail;
         this.isAdmin = isAdmin;
+        this.userImgUrl = userImgUrl;
     }
 
     public LoginResponseDto(String token, User user) {
@@ -51,5 +54,6 @@ public class LoginResponseDto {
         this.phoneNumber = user.getPhoneNumber();
         this.isVerifiedEmail = user.getIsVerifiedEmail();
         this.isAdmin = user.getIsAdmin();
+        this.userImgUrl = user.getUserImgUrl();
     }
 }
