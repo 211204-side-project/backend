@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "UserController",description = "유저 관련 API")
+@Tag(name = "UserController",description = "유저 관련 API requestmapping 삭제 버전")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
