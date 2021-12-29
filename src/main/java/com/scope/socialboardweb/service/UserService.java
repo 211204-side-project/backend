@@ -7,6 +7,7 @@ import com.scope.socialboardweb.repository.custom.CustomUserRepository;
 import com.scope.socialboardweb.service.exception.WrongAccountIdException;
 import com.scope.socialboardweb.service.exception.WrongUserPasswordException;
 import com.scope.socialboardweb.utils.jwt.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Autowired
     private CustomUserRepository customUserRepository;

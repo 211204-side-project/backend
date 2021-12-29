@@ -6,15 +6,17 @@ import com.scope.socialboardweb.dto.AuthAccountIdDto;
 import com.scope.socialboardweb.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "UserAuthController",description = "유저정보 중복여부 확인 API")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class UserAuthController {
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
 
     @Operation(summary = "accountId 중복 체크")
     @PostMapping(value = "/accountId", consumes = "application/x-www-form-urlencoded")

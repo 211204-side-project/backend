@@ -11,6 +11,7 @@ import com.scope.socialboardweb.utils.annotation.LoginUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +19,11 @@ import java.util.Optional;
 
 @Tag(name = "PostController",description = "게시물 API")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/post")
 public class PostRestController {
-    @Autowired
-    PostService postService;
+
+    private final PostService postService;
 
     @Operation(summary = "게시물 생성")
     @PostMapping(consumes = "application/x-www-form-urlencoded")
