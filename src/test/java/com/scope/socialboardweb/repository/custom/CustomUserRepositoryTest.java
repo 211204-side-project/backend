@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @Import(CustomUserRepository.class)
-@ActiveProfiles("test")
 @DataJpaTest
 class CustomUserRepositoryTest {
 
