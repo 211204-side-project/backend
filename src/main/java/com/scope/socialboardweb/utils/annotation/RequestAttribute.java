@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.ValueConstants;
 
 import java.lang.annotation.*;
 
+@Deprecated
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

@@ -1,9 +1,12 @@
 package com.scope.socialboardweb.domain;
 
 import com.scope.socialboardweb.dto.UserRequestDto;
+import com.scope.socialboardweb.repository.UserRepository;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,14 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String accountId;
     @Column(nullable = false)
     private String nickname;
     @Column(nullable = false)
@@ -28,19 +33,12 @@ public class User {
     private String password;
     @Column(nullable = false)
     private String phoneNumber;
-    @Column(name = "profileImg")
+    @Column
     private String userImgUrl;
     @Column
     private Boolean isVerifiedEmail;
-
-    public User(UserRequestDto userRequestDto) {
-        this.userId = userRequestDto.getUserId();
-        this.nickname = userRequestDto.getNickname();
-        this.password = userRequestDto.getPassword();
-        this.phoneNumber = userRequestDto.getPhoneNumber();
-        if(userRequestDto.getUserImgUrl() != null) this.userImgUrl = userRequestDto.getUserImgUrl();
-        this.isVerifiedEmail = false;
-    }
+    @Column
+    private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -54,8 +52,21 @@ public class User {
     @JsonIgnore
     private List<Alert> alertList = new ArrayList<>();
 
-    /* TODO
-    Follow와 ChatRoom에 대해, 양방향 관계로 할건지 의논 필요
-     */
+    public User(String accountId, String nickname, String password, String phoneNumber) {
+        this.accountId = accountId;
+        this.nickname = nickname;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User(UserRequestDto userRequestDto) {
+        this.accountId = userRequestDto.getAccountId();
+        this.nickname = userRequestDto.getNickname();
+        this.password = userRequestDto.getPassword();
+        this.phoneNumber = userRequestDto.getPhoneNumber();
+        if(userRequestDto.getUserImgUrl() != null) this.userImgUrl = userRequestDto.getUserImgUrl();
+        this.isVerifiedEmail = false;
+    }
+
 
 }

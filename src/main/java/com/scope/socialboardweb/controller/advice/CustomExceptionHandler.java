@@ -1,4 +1,4 @@
-package com.scope.socialboardweb.exception;
+package com.scope.socialboardweb.controller.advice;
 
 import com.scope.socialboardweb.dto.ResponseDto;
 import org.springframework.http.HttpStatus;
