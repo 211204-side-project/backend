@@ -20,15 +20,9 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    @Autowired
-    private CustomUserRepository customUserRepository;
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final CustomUserRepository customUserRepository;
+    private final JwtTokenProvider tokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     //    public User signup(User user) {
 //        return userRepository.save(user);
