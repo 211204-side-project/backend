@@ -37,6 +37,8 @@ public class User {
     private String userImgUrl;
     @Column
     private Boolean isVerifiedEmail;
+    @Column
+    private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore

@@ -25,6 +25,7 @@ public class InitAdminAccount {
             .phoneNumber("010-1234-5678")
             .userImgUrl(null)
             .isVerifiedEmail(false)
+            .isAdmin(true)
             .build();
         userRepository.save(user);
     }
