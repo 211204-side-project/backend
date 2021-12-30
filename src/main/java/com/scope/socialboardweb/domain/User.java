@@ -5,6 +5,8 @@ import com.scope.socialboardweb.repository.UserRepository;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
+@DynamicInsert //Null인 칼럼은 아예 insert문에서 제외됨.
 public class User {
 
     @Id
@@ -38,6 +41,7 @@ public class User {
     @Column
     private Boolean isVerifiedEmail;
     @Column
+    @ColumnDefault("false")//기본값으로 false 설정
     private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
