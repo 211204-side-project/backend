@@ -22,10 +22,10 @@ public class AdminService extends UserService {
         } catch (Exception e) {
             return false;
         }
-        return hasAdminAuthority(adminDto);
+        return isAdminAccount(adminDto);
     }
 
-    private boolean hasAdminAuthority(LoginResponseDto dto) {
+    private boolean isAdminAccount(LoginResponseDto dto) {
         if (dto.getIsAdmin()) {
             return true;
         }
