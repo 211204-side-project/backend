@@ -38,8 +38,10 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
 	//aop
 	implementation 'org.springframework.boot:spring-boot-starter-aop:2.5.6'
+	testImplementation 'org.springframework.boot:spring-boot-starter-aop:2.5.6'
 	//swagger 3
 	implementation 'org.springdoc:spring-boot-springdoc:3.1.2'
 
