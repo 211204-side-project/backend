@@ -25,16 +25,6 @@ import java.util.List;
 @Service
 public class AdminService extends UserService {
 
-//    private JpaRepository<ET, Long> repository;
-//
-//    public AdminService(UserRepository userRepository, CustomUserRepository customUserRepository, JwtTokenProvider tokenProvider, PasswordEncoder passwordEncoder) {
-//        super(userRepository, customUserRepository, tokenProvider, passwordEncoder);
-//    }
-//
-//    public void setRepositoryTypeClass(Class<ET> entityTypeClass) {
-//
-//    }
-
     private final UserRepository userRepository;
     private final CustomUserRepository customUserRepository;
     private final PostRepository postRepository;
@@ -60,6 +50,43 @@ public class AdminService extends UserService {
         return isAdminAccount(adminDto);
     }
 
+
+    /**
+     * 각 테이블의 모든 데이터를 가져오는 메서드
+     * @param entityTypeClass 가져올 테이블의 실제 도메인 엔티티 타입
+     * @param dtoTypeClass 엔티티 타입을 변환시킬 dto 타입
+     * @param <ET>
+     * @param <DT>
+     * @return 해당 테이블의 모든 엔티티에 대한 dto 리스트
+     * @throws Exception
+     */
+    @Transactional
+    public <ET, DT> List<DT> getAllEntities(Class<ET> entityTypeClass, Class<DT> dtoTypeClass) throws Exception {
+        List<ET> allEntityList = null; //쿼리 결과를 저장할 도메인 엔티티 리스트
+        List<DT> tableEntityDtoList = new ArrayList<>(); //엔티티를 dto로 변환하여 저장할 Dto 리스트
+
+        //전달받은 엔티티 타입에 따라, 사용할 repository 가 달라진다.
+        if (entityTypeClass.equals(User.class)) {
+            allEntityList = (List<ET>) userRepository.findAll();
+        } else if (entityTypeClass.equals(Post.class)) {
+            allEntityList = (List<ET>) postRepository.findAll();
+        } else if (entityTypeClass.equals(Comment.class)) {
+            allEntityList = (List<ET>) commentRepository.findAll();
+        }
+
+        //dto로 변환하여 리스트에 저장하기
+        for (ET entity : allEntityList) {
+            /*지정된 dto클래스의 생성자에 쿼리결과물인 entity를 전달하며,
+              새 dto 객체를 생성한다.
+              그리고 dto리스트에 저장한다.
+            */
+            DT dto = dtoTypeClass.getDeclaredConstructor(entityTypeClass).newInstance(entity);
+            tableEntityDtoList.add(dto);
+        }
+
+        return tableEntityDtoList;
+    }
+
     private boolean isAdminAccount(LoginResponseDto dto) {
         if (dto.getIsAdmin()) {
             return true;
@@ -67,36 +94,4 @@ public class AdminService extends UserService {
         return false;
     }
 
-    @Transactional
-    public List<UserTableEntityDto> getAllUserEntities() {
-        List<User> allUserList = userRepository.findAll();
-        List<UserTableEntityDto> userTableEntityDtoList = new ArrayList<>();
-        for (User user : allUserList) {
-            userTableEntityDtoList.add(new UserTableEntityDto(user));
-        }
-
-        return userTableEntityDtoList;
-    }
-
-    @Transactional
-    public List<PostTableEntityDto> getAllPostEntities() {
-        List<Post> allPostList = postRepository.findAll();
-        List<PostTableEntityDto> postTableEntityDtos = new ArrayList<>();
-        for (Post post : allPostList) {
-            postTableEntityDtos.add(new PostTableEntityDto(post));
-        }
-
-        return postTableEntityDtos;
-    }
-
-    @Transactional
-    public List<CommentTableEntityDto> getAllCommentEntities() {
-        List<Comment> allCommentList = commentRepository.findAll();
-        List<CommentTableEntityDto> commentTableEntityDtos = new ArrayList<>();
-        for (Comment comment : allCommentList) {
-            commentTableEntityDtos.add(new CommentTableEntityDto(comment));
-        }
-
-        return commentTableEntityDtos;
-    }
 }

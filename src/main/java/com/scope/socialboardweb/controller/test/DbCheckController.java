@@ -1,5 +1,8 @@
 package com.scope.socialboardweb.controller.test;
 
+import com.scope.socialboardweb.domain.Comment;
+import com.scope.socialboardweb.domain.Post;
+import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.LoginRequestDto;
 import com.scope.socialboardweb.dto.test.CommentTableEntityDto;
 import com.scope.socialboardweb.dto.test.PostTableEntityDto;
@@ -70,37 +73,36 @@ public class DbCheckController {
     }
 
     @GetMapping("/db/table/user")
-    public String showUserTable(Model model) {
-        List<String> entityFieldsNames = getEntityFieldsNames(UserTableEntityDto.class);
-        List<UserTableEntityDto> allUsers = adminService.getAllUserEntities();
+    public String showUserTable(Model model) throws Exception {
+        List<String> dtoFieldsNames = getEntityFieldsNames(UserTableEntityDto.class);
+        List<UserTableEntityDto> allUsers = adminService.getAllEntities(User.class, UserTableEntityDto.class);
 
-
-        model.addAttribute("entities", allUsers);
-        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("dtos", allUsers);
+        model.addAttribute("dtoFieldsNames", dtoFieldsNames);
         model.addAttribute("entityName", "User");
+
         return "db-table";
     }
 
     @GetMapping("/db/table/post")
-    public String showPostTable(Model model) {
-        List<String> entityFieldsNames = getEntityFieldsNames(PostTableEntityDto.class);
-        List<PostTableEntityDto> allPosts = adminService.getAllPostEntities();
+    public String showPostTable(Model model) throws Exception {
+        List<String> dtoFieldsNames = getEntityFieldsNames(PostTableEntityDto.class);
+        List<PostTableEntityDto> allPosts = adminService.getAllEntities(Post.class, PostTableEntityDto.class);
 
-
-        model.addAttribute("entities", allPosts);
-        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("dtos", allPosts);
+        model.addAttribute("dtoFieldsNames", dtoFieldsNames);
         model.addAttribute("entityName", "Post");
         return "db-table";
     }
 
     @GetMapping("/db/table/comment")
-    public String showCommentTable(Model model) {
-        List<String> entityFieldsNames = getEntityFieldsNames(CommentTableEntityDto.class);
-        List<CommentTableEntityDto> allCommentEntities = adminService.getAllCommentEntities();
+    public String showCommentTable(Model model) throws Exception {
+        List<String> dtoFieldsNames = getEntityFieldsNames(CommentTableEntityDto.class);
+        List<CommentTableEntityDto> allComments = adminService.getAllEntities(Comment.class, CommentTableEntityDto.class);
 
 
-        model.addAttribute("entities", allCommentEntities);
-        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("dtos", allComments);
+        model.addAttribute("dtoFieldsNames", dtoFieldsNames);
         model.addAttribute("entityName", "Comment");
         return "db-table";
     }

@@ -82,9 +82,9 @@
               </tr>
               </tfoot>
               <tbody>
-              <tr th:each="entity : ${entities}">
-                <th:block th:each="fieldName : ${entityFieldsNames}">
-                  <td th:text="${entity.getFieldValueByName(fieldName)}">FIELD NAME</td>
+              <tr th:each="dto : ${dtos}">
+                <th:block th:each="fieldName : ${dtoFieldsNames}">
+                  <td th:text="${dto.getFieldValueByName(fieldName)}">FIELD NAME</td>
                 </th:block>
               </tr>
               </tbody>
