@@ -20,7 +20,7 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "accountId", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @Column(name = "comment", nullable = false)
