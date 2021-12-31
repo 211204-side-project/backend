@@ -1,4 +1,4 @@
-package com.scope.socialboardweb.service.test;
+package com.scope.socialboardweb.service;
 
 import com.scope.socialboardweb.domain.Comment;
 import com.scope.socialboardweb.domain.Post;
@@ -81,6 +81,17 @@ public class AdminService extends UserService {
         }
 
         return tableEntityDtoList;
+    }
+
+    @Transactional
+    public void deleteRow(String entityName, Long rowPk) {
+        if (entityName.equals("User")) {
+            userRepository.deleteById(rowPk);
+        } else if (entityName.equals("Post")) {
+            postRepository.deleteById(rowPk);
+        } else if (entityName.equals("Comment")) {
+            commentRepository.deleteById(rowPk);
+        }
     }
 
     private boolean isAdminAccount(LoginResponseDto dto) {
