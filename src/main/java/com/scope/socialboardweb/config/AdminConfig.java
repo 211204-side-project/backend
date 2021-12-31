@@ -1,6 +1,6 @@
-package com.scope.socialboardweb.config.test;
+package com.scope.socialboardweb.config;
 
-import com.scope.socialboardweb.interceptor.test.AdminLoginInterceptor;
+import com.scope.socialboardweb.interceptor.AdminLoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,7 +15,7 @@ public class AdminConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminLoginInterceptor)
-            .addPathPatterns("/test/db/**")
-            .excludePathPatterns("/test/db");
+            .addPathPatterns("/admin/db/**")
+            .excludePathPatterns("/admin/db");
     }
 }

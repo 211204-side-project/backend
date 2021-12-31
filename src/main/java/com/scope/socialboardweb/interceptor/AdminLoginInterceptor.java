@@ -1,4 +1,4 @@
-package com.scope.socialboardweb.interceptor.test;
+package com.scope.socialboardweb.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,7 +13,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loginAdmin") == null) {
-            response.sendRedirect("/test/db");
+            response.sendRedirect("/admin/db");
             return false;
         }
         return true;
