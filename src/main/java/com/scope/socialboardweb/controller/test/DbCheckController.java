@@ -1,18 +1,24 @@
 package com.scope.socialboardweb.controller.test;
 
 import com.scope.socialboardweb.dto.LoginRequestDto;
+import com.scope.socialboardweb.dto.test.CommentTableEntityDto;
+import com.scope.socialboardweb.dto.test.PostTableEntityDto;
+import com.scope.socialboardweb.dto.test.UserTableEntityDto;
 import com.scope.socialboardweb.service.test.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /*TODO
  * swagger 관련 설정
@@ -61,6 +67,54 @@ public class DbCheckController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/test/db";
+    }
+
+    @GetMapping("/db/table/user")
+    public String showUserTable(Model model) {
+        List<String> entityFieldsNames = getEntityFieldsNames(UserTableEntityDto.class);
+        List<UserTableEntityDto> allUsers = adminService.getAllUserEntities();
+
+
+        model.addAttribute("entities", allUsers);
+        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("entityName", "User");
+        return "db-table";
+    }
+
+    @GetMapping("/db/table/post")
+    public String showPostTable(Model model) {
+        List<String> entityFieldsNames = getEntityFieldsNames(PostTableEntityDto.class);
+        List<PostTableEntityDto> allPosts = adminService.getAllPostEntities();
+
+
+        model.addAttribute("entities", allPosts);
+        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("entityName", "Post");
+        return "db-table";
+    }
+
+    @GetMapping("/db/table/comment")
+    public String showCommentTable(Model model) {
+        List<String> entityFieldsNames = getEntityFieldsNames(CommentTableEntityDto.class);
+        List<CommentTableEntityDto> allCommentEntities = adminService.getAllCommentEntities();
+
+
+        model.addAttribute("entities", allCommentEntities);
+        model.addAttribute("entityFieldsNames", entityFieldsNames);
+        model.addAttribute("entityName", "Comment");
+        return "db-table";
+    }
+
+
+
+    // 필드명(칼럼명) 가져오기
+    private <T> List<String> getEntityFieldsNames(Class<T> dtoType) {
+        List<String> entityFieldsNames = new ArrayList<>();
+        Field[] declaredFields = dtoType.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            entityFieldsNames.add(declaredField.getName());
+        }
+        return entityFieldsNames;
     }
 
 }
