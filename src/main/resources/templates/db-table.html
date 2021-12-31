@@ -87,10 +87,12 @@
                   <td th:text="${dto.getFieldValueByName(fieldName)}">FIELD VALUE</td>
                 </th:block>
                 <td>
-                  <form th:method="delete" th:action="@{/admin/db/table/{tableName}/{rowPk}(tableName=${entityName}, rowPk=${dto.id})}">
-                    <input type="hidden" name="_method" value="delete">
-                    <button class="btn btn-danger" type="submit">삭제</button>
-                  </form>
+                  <th:block th:if="${dto.id!=1 || entityName != T(com.scope.socialboardweb.service.TableNames).USER}">
+                    <form th:method="delete" th:action="@{/admin/db/table/{tableName}/{rowPk}(tableName=${entityName}, rowPk=${dto.id})}">
+                      <input type="hidden" name="_method" value="delete">
+                      <button class="btn btn-danger" type="submit">삭제</button>
+                    </form>
+                  </th:block>
                 </td>
               </tr>
               </tbody>
