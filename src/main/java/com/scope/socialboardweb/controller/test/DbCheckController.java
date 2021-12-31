@@ -107,6 +107,10 @@ public class DbCheckController {
         return "db-table";
     }
 
+    @GetMapping("/db/table/follow")
+    public String showFollowTable(Model model) throws Exception {
+        return "db-table-not-show";
+    }
 
 
     // 필드명(칼럼명) 가져오기
