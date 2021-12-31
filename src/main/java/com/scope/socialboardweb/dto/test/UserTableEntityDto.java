@@ -55,7 +55,7 @@ public class UserTableEntityDto implements TableEntityDto {
         this.isVerifiedEmail = user.getIsVerifiedEmail();
         this.isAdmin = user.getIsAdmin();
 
-        if (user.getUserImgUrl() == null || userImgUrl.isEmpty())
+        if (user.getUserImgUrl() == null || user.getUserImgUrl().isEmpty())
             this.userImgUrl = "null";
         else
             this.userImgUrl = user.getUserImgUrl();
@@ -79,6 +79,8 @@ public class UserTableEntityDto implements TableEntityDto {
                 return String.valueOf(this.getIsVerifiedEmail());
             case "isAdmin":
                 return String.valueOf(this.getIsAdmin());
+            case "userImgUrl":
+                return this.getUserImgUrl();
         }
         return null;
     }

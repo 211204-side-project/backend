@@ -49,12 +49,12 @@ public class PostTableEntityDto implements TableEntityDto {
         this.content = post.getContent();
         this.userId = post.getUser().getId();
 
-        if (postImgUrl == null || postImgUrl.isEmpty())
+        if (post.getPostImgUrl() == null || post.getPostImgUrl().isEmpty())
             this.postImgUrl = "null";
         else
             this.postImgUrl = post.getPostImgUrl();
 
-        if (postVideoUrl == null || postVideoUrl.isEmpty())
+        if (post.getPostVideoUrl() == null || post.getPostVideoUrl().isEmpty())
             this.postVideoUrl = "null";
         else
             this.postVideoUrl = post.getPostVideoUrl();

@@ -69,14 +69,14 @@
             <table id="datatablesSimple">
               <thead>
               <tr>
-                <th:block th:each="fieldName : ${entityFieldsNames}">
+                <th:block th:each="fieldName : ${dtoFieldsNames}">
                   <th th:text="${fieldName}">FIELD NAME</th>
                 </th:block>
               </tr>
               </thead>
               <tfoot>
               <tr>
-                <th:block th:each="fieldName : ${entityFieldsNames}">
+                <th:block th:each="fieldName : ${dtoFieldsNames}">
                   <th th:text="${fieldName}">FIELD NAME</th>
                 </th:block>
               </tr>

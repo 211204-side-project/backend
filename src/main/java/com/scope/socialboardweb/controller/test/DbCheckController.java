@@ -77,6 +77,9 @@ public class DbCheckController {
         List<String> dtoFieldsNames = getEntityFieldsNames(UserTableEntityDto.class);
         List<UserTableEntityDto> allUsers = adminService.getAllEntities(User.class, UserTableEntityDto.class);
 
+        log.info("user id: {}", allUsers.get(0).getId());
+        log.info("user ImgUrl: {}", allUsers.get(0).getUserImgUrl());
+
         model.addAttribute("dtos", allUsers);
         model.addAttribute("dtoFieldsNames", dtoFieldsNames);
         model.addAttribute("entityName", "User");
@@ -109,6 +112,18 @@ public class DbCheckController {
 
     @GetMapping("/db/table/follow")
     public String showFollowTable(Model model) throws Exception {
+        return "db-table-not-show";
+    }
+    @GetMapping("/db/table/alert")
+    public String showAlertTable(Model model) throws Exception {
+        return "db-table-not-show";
+    }
+    @GetMapping("/db/table/chat-room")
+    public String showChatRoomTable(Model model) throws Exception {
+        return "db-table-not-show";
+    }
+    @GetMapping("/db/table/chat")
+    public String showChatTable(Model model) throws Exception {
         return "db-table-not-show";
     }
 
