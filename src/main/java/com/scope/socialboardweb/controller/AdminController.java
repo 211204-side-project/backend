@@ -7,7 +7,8 @@ import com.scope.socialboardweb.dto.LoginRequestDto;
 import com.scope.socialboardweb.dto.table.CommentTableEntityDto;
 import com.scope.socialboardweb.dto.table.PostTableEntityDto;
 import com.scope.socialboardweb.dto.table.UserTableEntityDto;
-import com.scope.socialboardweb.service.test.AdminService;
+import com.scope.socialboardweb.service.AdminService;
+import com.scope.socialboardweb.service.TableNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /*TODO
  * swagger 관련 설정
@@ -77,12 +79,9 @@ public class AdminController {
         List<String> dtoFieldsNames = getEntityFieldsNames(UserTableEntityDto.class);
         List<UserTableEntityDto> allUsers = adminService.getAllEntities(User.class, UserTableEntityDto.class);
 
-        log.info("user id: {}", allUsers.get(0).getId());
-        log.info("user ImgUrl: {}", allUsers.get(0).getUserImgUrl());
-
         model.addAttribute("dtos", allUsers);
         model.addAttribute("dtoFieldsNames", dtoFieldsNames);
-        model.addAttribute("entityName", "User");
+        model.addAttribute("entityName", TableNames.USER);
 
         return "db-table";
     }
@@ -94,7 +93,7 @@ public class AdminController {
 
         model.addAttribute("dtos", allPosts);
         model.addAttribute("dtoFieldsNames", dtoFieldsNames);
-        model.addAttribute("entityName", "Post");
+        model.addAttribute("entityName", TableNames.POST);
         return "db-table";
     }
 
@@ -106,7 +105,7 @@ public class AdminController {
 
         model.addAttribute("dtos", allComments);
         model.addAttribute("dtoFieldsNames", dtoFieldsNames);
-        model.addAttribute("entityName", "Comment");
+        model.addAttribute("entityName", TableNames.COMMENT);
         return "db-table";
     }
 
@@ -125,6 +124,14 @@ public class AdminController {
     @GetMapping("/db/table/chat")
     public String showChatTable(Model model) throws Exception {
         return "db-table-not-show";
+    }
+
+    @DeleteMapping("/db/table/{tableName}/{rowPk}")
+    public String deleteRow(@PathVariable("tableName") TableNames tableName,
+                            @PathVariable("rowPk") Long rowPk,
+                            RedirectAttributes redirectAttributes) {
+        adminService.deleteRow(tableName, rowPk);
+        return "redirect:/admin/db/table/" + tableName.toString().toLowerCase(Locale.ROOT);
     }
 
 

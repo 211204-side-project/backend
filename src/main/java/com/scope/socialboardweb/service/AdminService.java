@@ -9,7 +9,6 @@ import com.scope.socialboardweb.repository.CommentRepository;
 import com.scope.socialboardweb.repository.PostRepository;
 import com.scope.socialboardweb.repository.UserRepository;
 import com.scope.socialboardweb.repository.custom.CustomUserRepository;
-import com.scope.socialboardweb.service.UserService;
 import com.scope.socialboardweb.utils.jwt.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -84,12 +83,12 @@ public class AdminService extends UserService {
     }
 
     @Transactional
-    public void deleteRow(String entityName, Long rowPk) {
-        if (entityName.equals("User")) {
+    public void deleteRow(TableNames tableName, Long rowPk) {
+        if (tableName == TableNames.USER) {
             userRepository.deleteById(rowPk);
-        } else if (entityName.equals("Post")) {
+        } else if (tableName == TableNames.POST) {
             postRepository.deleteById(rowPk);
-        } else if (entityName.equals("Comment")) {
+        } else if (tableName == TableNames.COMMENT) {
             commentRepository.deleteById(rowPk);
         }
     }

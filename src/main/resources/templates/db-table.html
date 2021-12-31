@@ -63,7 +63,7 @@
         <div class="card mb-4">
           <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            <th:block th:text="${entityName}">TEXT</th:block>
+            <th:block th:text="|${entityName} - TABLE|">TEXT</th:block>
           </div>
           <div class="card-body">
             <table id="datatablesSimple">
@@ -86,7 +86,12 @@
                 <th:block th:each="fieldName : ${dtoFieldsNames}">
                   <td th:text="${dto.getFieldValueByName(fieldName)}">FIELD VALUE</td>
                 </th:block>
-<!--                <td><button type="button" th:onclick="|location.href='@{/}'|"></td>-->
+                <td>
+                  <form th:method="delete" th:action="@{/admin/db/table/{tableName}/{rowPk}(tableName=${entityName}, rowPk=${dto.id})}">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="btn btn-danger" type="submit">삭제</button>
+                  </form>
+                </td>
               </tr>
               </tbody>
             </table>
