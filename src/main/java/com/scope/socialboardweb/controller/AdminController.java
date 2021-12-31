@@ -29,7 +29,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final AdminService adminService;
@@ -58,7 +58,7 @@ public class AdminController {
         HttpSession session = request.getSession();
         session.setAttribute("loginAdmin", admin);
 
-        return "redirect:/test/db/main";
+        return "redirect:/admin/db/main";
     }
 
     @GetMapping("/db/main")
@@ -69,7 +69,7 @@ public class AdminController {
     @GetMapping("/db/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/test/db";
+        return "redirect:/admin/db";
     }
 
     @GetMapping("/db/table/user")

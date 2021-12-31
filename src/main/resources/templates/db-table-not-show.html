@@ -21,7 +21,7 @@
   <!-- Navbar Brand-->
   <h1 class="navbar-brand ps-3">관리자용 DB 관리</h1>
   <!-- Navbar-->
-  <button class="btn btn-primary d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0" type="button" th:onclick="|location.href='@{/test/db/logout}'|">
+  <button class="btn btn-primary d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0" type="button" th:onclick="|location.href='@{/admin/db/logout}'|">
     Logout
   </button>
 </nav>
@@ -31,25 +31,25 @@
       <div class="sb-sidenav-menu">
         <div class="nav">
           <div class="sb-sidenav-menu-heading">Database Table</div>
-          <a class="nav-link" th:href="@{/test/db/table/user}">
+          <a class="nav-link" th:href="@{/admin/db/table/user}">
             USER
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/post}">
+          <a class="nav-link" th:href="@{/admin/db/table/post}">
             POST
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/comment}">
+          <a class="nav-link" th:href="@{/admin/db/table/comment}">
             COMMENT
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/follow}">
+          <a class="nav-link" th:href="@{/admin/db/table/follow}">
             FOLLOW
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/chat-room}">
+          <a class="nav-link" th:href="@{/admin/db/table/chat-room}">
             CHAT_ROOM
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/chat}">
+          <a class="nav-link" th:href="@{/admin/db/table/chat}">
             CHAT
           </a>
-          <a class="nav-link" th:href="@{/test/db/table/alert}">
+          <a class="nav-link" th:href="@{/admin/db/table/alert}">
             ALERT
           </a>
         </div>
