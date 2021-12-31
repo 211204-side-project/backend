@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/*TODO
- * swagger 관련 설정
- */
 @Slf4j
 @RequiredArgsConstructor
 @Controller
