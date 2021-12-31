@@ -1,11 +1,9 @@
-package com.scope.socialboardweb.dto.test;
+package com.scope.socialboardweb.dto.table;
 
 import com.scope.socialboardweb.domain.Post;
-import com.scope.socialboardweb.domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.scope.socialboardweb.dto.test;
+package com.scope.socialboardweb.dto.table;
 
 import com.scope.socialboardweb.domain.Comment;
 import lombok.Getter;

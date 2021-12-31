@@ -1,12 +1,12 @@
-package com.scope.socialboardweb.controller.test;
+package com.scope.socialboardweb.controller;
 
 import com.scope.socialboardweb.domain.Comment;
 import com.scope.socialboardweb.domain.Post;
 import com.scope.socialboardweb.domain.User;
 import com.scope.socialboardweb.dto.LoginRequestDto;
-import com.scope.socialboardweb.dto.test.CommentTableEntityDto;
-import com.scope.socialboardweb.dto.test.PostTableEntityDto;
-import com.scope.socialboardweb.dto.test.UserTableEntityDto;
+import com.scope.socialboardweb.dto.table.CommentTableEntityDto;
+import com.scope.socialboardweb.dto.table.PostTableEntityDto;
+import com.scope.socialboardweb.dto.table.UserTableEntityDto;
 import com.scope.socialboardweb.service.test.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/test")
-public class DbCheckController {
+public class AdminController {
 
     private final AdminService adminService;
 
