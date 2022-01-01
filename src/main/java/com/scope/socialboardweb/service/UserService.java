@@ -21,14 +21,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    private CustomUserRepository customUserRepository;
+    private final CustomUserRepository customUserRepository;
 
-    @Autowired
-    private JwtTokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     //    public User signup(User user) {
 //        return userRepository.save(user);
