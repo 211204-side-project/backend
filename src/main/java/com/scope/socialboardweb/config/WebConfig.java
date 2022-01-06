@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
 //                .allowedOrigins("https://master.d2pi1b7mbo7sh5.amplifyapp.com/**", "/**:3000/")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "HEAD", "PATCH", "PUT", "DELETE");
+                .allowedMethods("*");
     }
 
     @Override
