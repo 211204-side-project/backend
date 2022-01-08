@@ -18,9 +18,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public PostResponseDto createPost(PostRequestDto postRequestDto, UserRequestDto userRequestDto) {
         Long userId = userRequestDto.getUserEntity().getId();
