@@ -33,6 +33,12 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        //Token Preflight 처리
+        if (isPreflight(request.getMethod())) {
+            return true;
+        }
+
         String authorizationValue = request.getHeader("Authorization");
         Claims claims = null;
 
@@ -63,6 +69,13 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         request.setAttribute("loginUser", new UserRequestDto(requestUser.get()));
         return true;
+    }
+
+    private boolean isPreflight(String httpMethod) {
+        if (httpMethod.equals("OPTIONS")) {
+            return true;
+        }
+        return false;
     }
 
     private void responseError(HttpServletResponse response, String status, String msg) throws IOException {
