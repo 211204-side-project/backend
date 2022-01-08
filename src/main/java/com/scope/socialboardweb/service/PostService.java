@@ -7,17 +7,20 @@ import com.scope.socialboardweb.dto.PostResponseDto;
 import com.scope.socialboardweb.dto.UserRequestDto;
 import com.scope.socialboardweb.repository.PostRepository;
 import com.scope.socialboardweb.repository.UserRepository;
+import com.scope.socialboardweb.repository.custom.CustomPostRepository;
 import com.scope.socialboardweb.service.exception.UserNotAuthorizedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final CustomPostRepository customPostRepository;
     private final UserRepository userRepository;
 
     public PostResponseDto createPost(PostRequestDto postRequestDto, UserRequestDto userRequestDto) {
@@ -68,7 +71,10 @@ public class PostService {
         return post;
     }
 
-
+    public List<Post> searchPostByTitleOrContent(String keyword) {
+        List<Post> foundPost = customPostRepository.searchPostByTitleOrContent(keyword);
+        return foundPost;
+    }
 
 
 }
