@@ -2,9 +2,7 @@ package com.scope.socialboardweb.controller;
 
 import com.scope.socialboardweb.domain.Post;
 import com.scope.socialboardweb.domain.User;
-import com.scope.socialboardweb.dto.PostRequestDto;
-import com.scope.socialboardweb.dto.PostResponseDto;
-import com.scope.socialboardweb.dto.UserRequestDto;
+import com.scope.socialboardweb.dto.*;
 import com.scope.socialboardweb.service.PostService;
 import com.scope.socialboardweb.service.UserService;
 import com.scope.socialboardweb.utils.annotation.LoginUser;
@@ -15,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "PostController",description = "게시물 API")
@@ -49,5 +48,15 @@ public class PostRestController {
         return postService.deletePost(postId, userRequestDto);
     }
 
+    @Operation(summary = "게시글 검색")
+    @GetMapping("/search")
+    ResponseDto searchPosts(@RequestParam("keyword") String rawKeyword,
+                            @RequestParam("nowpage") int nowpage,
+                            @RequestParam("size") int size) {
+        List<PostDto> postList
+          = postService.searchPostByTitleOrContentOrUser(rawKeyword, nowpage, size);
+
+        return new ResponseDto(postList, "succeed");
+    }
 
 }

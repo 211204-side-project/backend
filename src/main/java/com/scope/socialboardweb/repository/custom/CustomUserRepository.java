@@ -110,4 +110,24 @@ public class CustomUserRepository {
             .executeUpdate();
         em.clear();
     }
+
+    /**
+     * nickname으로 사용자 검색, find가 아닌 search, LIKE 문법 사용
+     * @param generalNickname 공백을 포함한 검색어(닉네임)
+     * @param noSpaceNickname 공백을 제외한 검색어(닉네임)
+     * @return 검색 결과 반환
+     */
+    public List<User> searchByNickname(String generalNickname, String noSpaceNickname) {
+        String jpql = "select u from User u where " +
+          "lower(u.nickname) like :general " +
+          "or lower(u.nickname) like :nospace";
+
+        TypedQuery<User> userTypedQuery = em.createQuery(jpql, User.class)
+          .setParameter("general", generalNickname)
+          .setParameter("nospace", noSpaceNickname);
+
+        List<User> userList = userTypedQuery.getResultList();
+
+        return userList;
+    }
 }
