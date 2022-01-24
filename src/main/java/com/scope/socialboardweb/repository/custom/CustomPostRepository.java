@@ -6,14 +6,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Locale;
 
-@RequiredArgsConstructor
 @Repository
 public class CustomPostRepository {
-  private final EntityManager em;
+
+  @PersistenceContext
+  private EntityManager em;
 
   /**
    * 제목, 본문, 작성자로 게시글 검색 (LIKE 문법 사용)
