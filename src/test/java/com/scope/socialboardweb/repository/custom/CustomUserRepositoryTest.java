@@ -21,12 +21,9 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@ExtendWith(SpringExtension.class)
-//@Import(CustomUserRepository.class)
-//@ActiveProfiles("test")
-//@DataJpaTest
-@SpringBootTest
-@Transactional
+@Import(CustomUserRepository.class)
+@ActiveProfiles("test")
+@DataJpaTest
 class CustomUserRepositoryTest {
 
     @Autowired
